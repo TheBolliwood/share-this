@@ -98,7 +98,7 @@ export default (opts) => {
 
     function drawPopover(range) {
         const toBeOpened = !popover;
-        const rawText = range.toString();
+        const rawText = _window.getSelection().toString();
         const text = options.transformer(rawText);
         const sharers = options.sharers.filter(sharerCheck.bind(null, text, rawText));
 
