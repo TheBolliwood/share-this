@@ -26,14 +26,14 @@ export function stylePopover(popover, range, options) {
 }
 
 const dataAttribute = "data-share-via";
-export function popoverClick(sharers, event) {
+export function popoverClick(sharers, event, popover) {
     const item = closest(event.target, `[${dataAttribute}]`);
     if (!item) return;
 
     const via = item.getAttribute(dataAttribute);
     const sharer = findByName(sharers, via);
     if (sharer && isCallable(sharer.action)) {
-        sharer.action(event, item);
+        sharer.action(event, item, popover);
     }
 }
 
@@ -42,7 +42,7 @@ export function lifeCycleFactory(document) {
         createPopover() {
             const popover = document.createElement("div");
             popover.addEventListener("click", function(event) {
-                popoverClick(this.sharers, event);
+                popoverClick(this.sharers, event, popover);
             });
             return popover;
         },
