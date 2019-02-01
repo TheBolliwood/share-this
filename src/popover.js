@@ -20,6 +20,7 @@ export function stylePopover(popover, range, options) {
     style.height = `${endLineRect.bottom - endLineRect.top}px`;
     style.top = `${endLineRect.top - offsetScroll.top}px`;
     style.position = "absolute";
+    style['z-index'] = 10000;
 
     // eslint-disable-next-line no-param-reassign
     popover.className = options.popoverClass;
@@ -47,7 +48,7 @@ export function lifeCycleFactory(document) {
             return popover;
         },
         attachPopover(popover) {
-            document.body.appendChild(popover);
+            document.body.insertBefore(popover, document.body.firstChild);
         },
         removePopover(popover) {
             const parent = popover.parentNode;
